@@ -46,6 +46,8 @@ func main() {
 
 	SetupCloseHandler()
 
+	println("\n\tSearching network responses on port " + os.Args[1] + "\n")
+
 	wg := sync.WaitGroup{}
 
 	ifaces, err := net.Interfaces()
@@ -86,7 +88,7 @@ func ScanNetwork(network string, port string, wg *sync.WaitGroup) {
 	}
 
 	mask := binary.BigEndian.Uint32(ipv4Net.Mask)
-	start := binary.BigEndian.Uint32(ipv4Net.IP) - 1
+	start := binary.BigEndian.Uint32(ipv4Net.IP)
 
 	finish := (start & mask) | (mask ^ 0xffffffff)
 
